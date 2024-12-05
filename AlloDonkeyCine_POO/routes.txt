@@ -1,0 +1,15 @@
+/book // Afficher la liste des books
+/book/add // Afficher le formulaire pour ajouter un book
+/book/edit/{id} // Afficher le formulaire pour modifier un bok 
+/book/delete/{id} // Supprimer un book
+/book/detail/{id} // Afficher les détaile d'un book
+
+/author
+/author/add
+/author/edit/{id}
+/author/hide/{id}
+/author/detail/{id}
+
+/home
+
+/login
