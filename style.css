@@ -3,14 +3,14 @@ body {
     font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
+    background-color: rgb(245, 255, 191);
     color: #333;
   }
   
   header {
     text-align: center;
     padding: 2rem 1rem;
-    background-color: #007bff;
+    background-color: blue;
     color: white;
   }
   
@@ -32,7 +32,7 @@ body {
   #projects h2 {
     font-size: 2rem;
     margin-bottom: 2rem;
-    color: #007bff;
+    color: blue;
   }
   
   .projects-grid {
@@ -44,7 +44,7 @@ body {
   }
   
   .project-card {
-    background: white;
+    background: rgb(207, 207, 207);
     padding: 2rem;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -52,13 +52,19 @@ body {
     transition: transform 0.3s;
   }
   
+  .project-card img{
+    width: 90%;
+    height: 45%;
+  }
+
+
   .project-card:hover {
     transform: translateY(-5px);
   }
   
   .project-card h3 {
     font-size: 1.5rem;
-    color: #007bff;
+    color: blue;
     margin-bottom: 0.5rem;
   }
   
@@ -71,21 +77,22 @@ body {
   .project-card a {
     text-decoration: none;
     color: white;
-    background-color: #007bff;
     padding: 0.5rem 1rem;
     border-radius: 4px;
     transition: background-color 0.3s;
   }
   
-  .project-card a:hover {
-    background-color: #0056b3;
-  }
+ 
   
   footer {
     text-align: center;
     padding: 1rem 0;
-    background-color: #007bff;
+    background-color: blue;
     color: white;
     margin-top: 2rem;
+  }
+
+  footer p a{
+    color: red;
   }
   
