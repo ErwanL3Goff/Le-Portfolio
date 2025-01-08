@@ -3,14 +3,16 @@ body {
     font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: rgb(245, 255, 191);
+    background-image: url(images/iCg.gif);
+    background-repeat: no-repeat;
+    background-size: cover;
     color: #333;
   }
   
   header {
     text-align: center;
     padding: 2rem 1rem;
-    background-color: blue;
+    background-color: black;
     color: white;
   }
   
@@ -32,7 +34,7 @@ body {
   #projects h2 {
     font-size: 2rem;
     margin-bottom: 2rem;
-    color: blue;
+    color: white;
   }
   
   .projects-grid {
@@ -64,7 +66,7 @@ body {
   
   .project-card h3 {
     font-size: 1.5rem;
-    color: blue;
+    color: black;
     margin-bottom: 0.5rem;
   }
   
@@ -87,7 +89,7 @@ body {
   footer {
     text-align: center;
     padding: 1rem 0;
-    background-color: blue;
+    background-color: black;
     color: white;
     margin-top: 2rem;
   }
