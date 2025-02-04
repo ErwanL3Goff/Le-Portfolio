@@ -1,89 +1,95 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portfolio - Erwan Le Goff</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - Erwan Le Goff</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'poppins': ['Poppins', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
 </head>
 
-<body>
-  <header>
-    <h1>Erwan Le Goff</h1>
-    <p>Bienvenue sur mon Portfolio</p>
-  </header>
+<body class="font-poppins m-0 p-0 text-gray-800 bg-cover bg-no-repeat" style="background-image: url('images/iCg.gif')">
+    <header class="text-center py-8 px-4 bg-black text-white">
+        <h1 class="text-4xl m-0 font-semibold">Erwan Le Goff</h1>
+        <p class="text-xl mt-2">Bienvenue sur mon Portfolio</p>
+        <h2 class="text-lg font-normal max-w-4xl mx-auto mt-4">
+            Passionné par le développement web et les nouvelles technologies, je possède une solide expérience en "Developement Informatique" et dans la topographie. Grâce à ma formation en topographie et en développement web, je suis en mesure d'allier précision technique et créativité numérique. Rigoureux, curieux et toujours en quête d'amélioration, je m'investis pleinement dans chaque projet pour apporter des solutions efficaces.
+        </h2>
+    </header>
 
-  <section id="projects">
-    <h2>Mes Projets :</h2>
-    <div class="projects-grid">
+    <section class="py-12 px-4 text-center" id="projects">
+        <h2 class="text-3xl mb-8 text-white">Mes Projets :</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            <div class="bg-gray-200 p-8 rounded-lg shadow-md text-left transform transition duration-300 hover:-translate-y-1">
+                <a href="https://html-preview.github.io/?url=https://github.com/ErwanL3Goff/Tamagotchi/blob/main/index.html" target="_blank" class="block">
+                    <img src="images/Tamagotchi.jpg" class="w-[90%] h-[45%] mb-4" alt="Tamagotchi" />
+                    <h3 class="text-2xl text-black mb-2">Projet 1 : Tamagotchi réalisé en Javascript</h3>
+                    <p class="text-gray-600">Petite application réalisé avec les bases du JS et un peu de html/css.</p>
+                </a>
+            </div>
 
+            <div class="bg-gray-200 p-8 rounded-lg shadow-md text-left transform transition duration-300 hover:-translate-y-1">
+                <a href="https://html-preview.github.io/?url=https://github.com/ErwanL3Goff/Javascript-game/blob/main/index.html" target="_blank" class="block">
+                    <img src="images/movechar.jpg" class="w-[90%] h-[45%] mb-4" alt="Character Game" />
+                    <h3 class="text-2xl text-black mb-2">Projet 2 : Petit jeu codé en Javascript</h3>
+                    <p class="text-gray-600">Petit personnage qui peu se déplacer grâce aux touches du clavier et attaquer avec la barre d'espace.</p>
+                </a>
+            </div>
 
+            <div class="bg-gray-200 p-8 rounded-lg shadow-md text-left transform transition duration-300 hover:-translate-y-1">
+                <a href="https://www.paninico.com" target="_blank" class="block">
+                    <img src="images/Paninico.jpg" class="w-[90%] h-[45%] mb-4" alt="Paninico" />
+                    <h3 class="text-2xl text-black mb-2">Projet 3 : Projet WordPress pour un site de restauration</h3>
+                    <p class="text-gray-600">Projet WordPress.</p>
+                </a>
+            </div>
 
-      <div class="project-card">
-        <a href="https://html-preview.github.io/?url=https://github.com/ErwanL3Goff/Tamagotchi/blob/main/index.html"
-          target="_blank">
-          <img src="images/Tamagotchi.jpg" />
-          <h3>Projet 1 : Tamagotchi réalisé en Javascript</h3>
-          <p>Petite application réalisé avec les bases du JS et un peu de html/css.</p>
-        </a>
-      </div>
+            <div class="bg-gray-200 p-8 rounded-lg shadow-md text-left transform transition duration-300 hover:-translate-y-1">
+                <a href="https://html-preview.github.io/?url=https://github.com/ErwanL3Goff/Allodonkeycine_js/blob/main/index.html" target="_blank" class="block">
+                    <img src="images/Allodonkeycine.jpg" class="w-[90%] h-[45%] mb-4" alt="Allodonkeycine" />
+                    <h3 class="text-2xl text-black mb-2">Projet 4 : Projet en Js pour un site de réservation cinema</h3>
+                    <p class="text-gray-600">Autre projet en équipe dans le cadre de la formation de DonkeySchool.</p>
+                </a>
+            </div>
 
-      <div class="project-card">
-        <a href="https://html-preview.github.io/?url=https://github.com/ErwanL3Goff/Javascript-game/blob/main/index.html"
-          target="_blank">
-          <img src="images/movechar.jpg" />
-          <h3>Projet 2 : Petit jeu codé en Javascript</h3>
-          <p>Petit personnage qui peu se déplacer grâce aux touches du clavier et attaquer avec la barre d'espace.</p>
-        </a>
-      </div>
+            <div class="bg-gray-200 p-8 rounded-lg shadow-md text-left transform transition duration-300 hover:-translate-y-1">
+                <a href="https://html-preview.github.io/?url=https://github.com/ErwanL3Goff/Jeu-de-plateforme/blob/main/index.html" target="_blank" class="block">
+                    <img src="images/Mario.jpg" class="w-[90%] h-[45%] mb-4" alt="Mario Game" />
+                    <h3 class="text-2xl text-black mb-2">Projet 5 : Jeu de plateforme en javascript</h3>
+                    <p class="text-gray-600">Projet personnel dans lequel j'ai utilisé Javascript pour coder un jeu de plateforme.</p>
+                </a>
+            </div>
 
-      <div class="project-card">
-        <a href="https://www.paninico.com"
-          target="_blank">
-          <img src="images/Paninico.jpg" />
-          <h3>Projet 3 : Projet WordPress pour un site de restauration</h3>
-          <p>Projet WordPress.</p>
-        </a>
-      </div>
+            <div class="bg-gray-200 p-8 rounded-lg shadow-md text-left transform transition duration-300 hover:-translate-y-1">
+                <a href="RapportdeStageBTS/Rapport-de-stage-Erwan-_1_.html" target="_blank" class="block">
+                    <img src="images/SGDS.jpg" class="w-[90%] h-[45%] mb-4" alt="SGDS" />
+                    <h3 class="text-2xl text-black mb-2">Projet 6 : Rapport de stage BTS Topographe Géomètre</h3>
+                    <p class="text-gray-600">Stage effectué à SGDS International</p>
+                </a>
+            </div>
+        </div>
+    </section>
 
-      <div class="project-card">
-        <a href="https://html-preview.github.io/?url=https://github.com/ErwanL3Goff/Allodonkeycine_js/blob/main/index.html"
-          target="_blank">
-          <img src="images/Allodonkeycine.jpg" />
-          <h3>Projet 4 : Projet en Js pour un site de réservation cinema</h3>
-          <p>Autre projet en équipe dans le cadre de la formation de DonkeySchool.</p>
-        </a>
-      </div>
-
-      <div class="project-card">
-        <a href="https://html-preview.github.io/?url=https://github.com/ErwanL3Goff/Jeu-de-plateforme/blob/main/index.html"
-          target="_blank">
-          <img src="images/Mario.jpg" />
-          <h3>Projet 5 : Jeu de plateforme en javascript</h3>
-          <p>Projet personnel dans lequel j'ai utilisé Javascript pour coder un jeu de plateforme.</p>
-        </a>
-      </div>
-      
-      <div class="project-card">
-        <a href="RapportdeStageBTS/Rapport-de-stage-Erwan-_1_.html" target="_blank">
-          <img src="images/SGDS.jpg" />
-          <h3>Projet 6 : Rapport de stage BTS Topographe Géomètre</h3>
-          <p>Stage effectué à SGDS International</p>
-        </a>
-      </div>
-    </div>
-    
-  </section>
-
-  <footer>
-    <p>© 2024 Erwan Le Goff - <a href="mailto:elegoff296@gmail.com" target="_blank">Me Contacter</a></p>
-    <p>MON GITHUB - <a href="https://github.com/ErwanL3Goff?tab=repositories" target="_blank">ErwanL3Goff</a></p>
-    <p><a href="MonCV.html" target="_blank">Mon CV</a></p>
-    <p><a href="https://www.linkedin.com/in/erwan-le-goff-bb1a81332/" target="_blank">Linkedin</a></p>
-  </footer>
+    <footer class="text-center py-4 bg-black text-white mt-8">
+        <p class="mb-2">© 2024 Erwan Le Goff - <a href="mailto:elegoff296@gmail.com" class="text-red-500">Me Contacter</a></p>
+        <p class="mb-2"><strong>Mobile:</strong> <a href="tel:+33767335117" class="text-red-500">07 67 33 51 17</a></p>
+        <p class="mb-2">MON GITHUB - <a href="https://github.com/ErwanL3Goff?tab=repositories" target="_blank" class="text-red-500">ErwanL3Goff</a></p>
+        <p class="mb-2"><a href="MonCV.html" target="_blank" class="text-red-500">Mon CV</a></p>
+        <p class="mb-2"><a href="https://www.linkedin.com/in/erwan-le-goff-bb1a81332/" target="_blank" class="text-red-500">Linkedin</a></p>
+        <audio controls class="my-4">
+            <source src="audio.mp3" type="audio/mpeg">
+        </audio>
+    </footer>
 </body>
-
 </html>
