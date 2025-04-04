@@ -1,11 +1,234 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfolio - Erwan Le Goff</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Styles pour le chatbot amélioré */
+        .chatbot-container {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+            transition: all 0.4s ease;
+        }
+
+        .chatbot-button {
+            background-color: #d40000;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease, transform 0.2s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .chatbot-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .chatbot-button:active {
+            transform: scale(0.95);
+        }
+
+        .chatbot-button::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 5px;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.5);
+            opacity: 0;
+            border-radius: 100%;
+            transform: scale(1, 1) translate(-50%, -50%);
+            transform-origin: 50% 50%;
+        }
+
+        .chatbot-button:focus:not(:active)::after {
+            animation: ripple 1s ease-out;
+        }
+
+        .chatbot-window {
+            position: absolute;
+            bottom: 80px;
+            right: 0;
+            width: 300px;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            flex-direction: column;
+            max-height: 0;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.4s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+        }
+
+        .chatbot-window.active {
+            max-height: 500px;
+            opacity: 1;
+            transform: translateY(0);
+            display: flex;
+        }
+
+        .chatbot-header {
+            background-color: #af4c4c;
+            color: white;
+            padding: 15px;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chatbot-body {
+            padding: 15px;
+            overflow-y: auto;
+            flex-grow: 1;
+            max-height: 350px;
+        }
+
+        .chatbot-question {
+            background-color: #f1f1f1;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 15px;
+            margin: 8px 0;
+            cursor: pointer;
+            width: 100%;
+            text-align: left;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .chatbot-question:hover {
+            background-color: #e1e1e1;
+            transform: translateX(5px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .chatbot-answer {
+            background-color: #324433;
+            color: white;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+            display: none;
+            animation: fadeIn 0.5s ease-out;
+            line-height: 1.5;
+        }
+
+        .chatbot-answer ul {
+            padding-left: 20px;
+            margin: 10px 0;
+        }
+
+        .chatbot-answer a {
+            color: #4CAF50;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .chatbot-answer a:hover {
+            text-decoration: underline;
+        }
+
+        .chatbot-footer {
+            padding: 10px;
+            background-color: #f9f9f9;
+            text-align: center;
+            font-size: 12px;
+            color: #666;
+        }
+
+        .close-chatbot {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 20px;
+            transition: transform 0.2s ease;
+        }
+
+        .close-chatbot:hover {
+            transform: rotate(90deg);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes ripple {
+            0% {
+                transform: scale(0, 0);
+                opacity: 1;
+            }
+
+            20% {
+                transform: scale(25, 25);
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+                transform: scale(40, 40);
+            }
+        }
+
+        /* Effet de vague sur le bouton */
+        .wave {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0) 70%);
+            border-radius: 50%;
+            transform: scale(0);
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .wave.active {
+            animation: wave 0.6s ease-out;
+        }
+
+        @keyframes wave {
+            0% {
+                transform: scale(0);
+                opacity: 0.5;
+            }
+
+            100% {
+                transform: scale(2);
+                opacity: 0;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -13,7 +236,11 @@
         <h1>Erwan Le Goff</h1>
         <p>Bienvenue sur mon Portfolio</p>
         <h2>
-            Passionné par le développement web et les nouvelles technologies, je possède une solide expérience en "Developement Informatique" et dans la topographie. Grâce à mes formations en topographie et en développement web, je suis en mesure d'allier précision technique et créativité numérique. Rigoureux, curieux et toujours en quête d'amélioration, je m'investis pleinement dans chaque projet pour apporter des solutions efficaces.
+            Passionné par le développement web et les nouvelles technologies, je possède une solide expérience en
+            "Developement Informatique" et dans la topographie. Grâce à mes formations en topographie et en
+            développement web, je suis en mesure d'allier précision technique et créativité numérique. Rigoureux,
+            curieux et toujours en quête d'amélioration, je m'investis pleinement dans chaque projet pour apporter des
+            solutions efficaces.
         </h2>
     </header>
 
@@ -64,7 +291,8 @@
                 <a href="https://erwan-le-goff-cours.onrender.com/" target="_blank">
                     <img src="images/Documentation.png" alt="SGDS" />
                     <h3>Projet 6 : Documentation</h3>
-                    <p>Utile pour expliquer les bases du html, javascript et php à un débutant pour le moment. Pour pouvoir donner des cours en particulier.</p>
+                    <p>Utile pour expliquer les bases du html, javascript et php à un débutant pour le moment. Pour
+                        pouvoir donner des cours en particulier.</p>
                 </a>
             </div>
 
@@ -85,5 +313,159 @@
         <p><a href="MonCV.html" target="_blank">Mon CV</a></p>
         <p><a href="https://www.linkedin.com/in/erwan-le-goff-bb1a81332/" target="_blank">Linkedin</a></p>
     </footer>
+
+    <!-- Chatbot Container -->
+    <div class="chatbot-container">
+        <div class="chatbot-window" id="chatbotWindow">
+            <div class="chatbot-header">
+                Assistant Virtuel
+                <button class="close-chatbot" id="closeChatbot">×</button>
+            </div>
+            <div class="chatbot-body" id="chatbotBody">
+                <p>Bonjour ! Posez-moi une question :</p>
+                
+                <button class="chatbot-question" data-target="answer1">Quelles sont vos compétences techniques ?</button>
+                <div class="chatbot-answer" id="answer1">
+                    <p>Je maîtrise plusieurs technologies de développement web :</p>
+                    <ul>
+                        <li>HTML5/CSS3 pour la structuration et la mise en forme</li>
+                        <li>JavaScript pour le développement front-end interactif</li>
+                        <li>PHP pour le développement back-end</li>
+                        <li>Frameworks : Angular (front) et Symfony (back)</li>
+                        <li>WordPress pour la création de sites CMS</li>
+                        <li>Conception d'interfaces responsive et ergonomiques</li>
+                    </ul>
+                </div>
+                
+                <button class="chatbot-question" data-target="answer2">Quelle est votre formation ?</button>
+                <div class="chatbot-answer" id="answer2">
+                    <p>J'ai suivi plusieurs formations :</p>
+                    <ul>
+                        <li>Formation Développeur Web chez Donkey School (2024)</li>
+                        <li>Licence Professionnelle MIAW à l'Université d'Evry (2023)</li>
+                        <li>Formation d'Intégrateur Web chez OpenClassrooms (2022-2023)</li>
+                        <li>BTS Métier du géomètre topographe (2019-2022)</li>
+                        <li>Bac Professionnel Technicien Géomètre Topographe (2016-2019)</li>
+                    </ul>
+                </div>
+                
+                <button class="chatbot-question" data-target="answer3">Quelle est votre expérience professionnelle ?</button>
+                <div class="chatbot-answer" id="answer3">
+                    <p>Mon expérience professionnelle comprend :</p>
+                    <ul>
+                        <li>Plusieurs stages en topographie chez SGDS International et Cabinet Albertalli</li>
+                        <li>Réalisation de maquettes 3D et plans 2D/3D</li>
+                        <li>Relevés de terrain avec équipements professionnels (Leica TS12, GPS)</li>
+                        <li>Projets web personnels démontrant mes compétences techniques</li>
+                    </ul>
+                </div>
+                
+                <button class="chatbot-question" data-target="answer4">Quels sont vos projets récents ?</button>
+                <div class="chatbot-answer" id="answer4">
+                    <p>Voici quelques-uns de mes projets récents :</p>
+                    <ul>
+                        <li>Tamagotchi en JavaScript</li>
+                        <li>Jeu Zelda-like en Canvas</li>
+                        <li>Site WordPress pour un restaurant</li>
+                        <li>Site de réservation de cinéma en JS</li>
+                        <li>Jeu de plateforme en JavaScript</li>
+                        <li>Documentation pédagogique pour cours particuliers</li>
+                        <li>Et un autre projet en Symfony et Angular avec la promo de septembre 2024 de Donkey School sur l'élaboration d'une application de matching entre recruteurs eet chercheurs d'emploi (pas encore visible sur le portfolio)</li>
+                    </ul>
+                    <p>Tous ces projets sont accessibles depuis mon portfolio.</p>
+                </div>
+                
+                <button class="chatbot-question" data-target="answer5">Comment vous contacter ?</button>
+                <div class="chatbot-answer" id="answer5">
+                    <p>Vous pouvez me contacter par :</p>
+                    <ul>
+                        <li>Email : elegoff296@gmail.com</li>
+                        <li>Téléphone : 07 67 33 51 17</li>
+                        <li>LinkedIn : <a href="https://www.linkedin.com/in/erwan-le-goff-bb1a81332/" target="_blank">profil LinkedIn</a></li>
+                        <li>GitHub : <a href="https://github.com/ErwanL3Goff?tab=repositories" target="_blank">ErwanL3Goff</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="chatbot-footer">
+                <small>Assistant de Erwan Le Goff</small>
+            </div>
+        </div>
+        <div id="wave" class="wave"></div>
+        <button class="chatbot-button" id="chatbotButton">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+            </svg>
+        </button>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const chatbotButton = document.getElementById('chatbotButton');
+            const chatbotWindow = document.getElementById('chatbotWindow');
+            const closeChatbot = document.getElementById('closeChatbot');
+            const questions = document.querySelectorAll('.chatbot-question');
+            const wave = document.getElementById('wave');
+            
+            // Animation d'onde au clic
+            chatbotButton.addEventListener('click', function(e) {
+                // Position de l'onde
+                const rect = this.getBoundingClientRect();
+                wave.style.left = (e.clientX - rect.left) + 'px';
+                wave.style.top = (e.clientY - rect.top) + 'px';
+                
+                // Activer l'animation
+                wave.classList.add('active');
+                setTimeout(() => wave.classList.remove('active'), 600);
+                
+                // Basculer la fenêtre du chatbot
+                chatbotWindow.classList.toggle('active');
+                
+                // Petite vibration du bouton
+                this.style.transform = 'scale(0.9)';
+                setTimeout(() => {
+                    this.style.transform = 'scale(1)';
+                }, 100);
+            });
+            
+            // Fermer le chatbot
+            closeChatbot.addEventListener('click', function() {
+                chatbotWindow.classList.remove('active');
+            });
+            
+            // Gérer les questions avec animation
+            questions.forEach(question => {
+                question.addEventListener('click', function() {
+                    // Animation de clic
+                    this.style.transform = 'scale(0.98)';
+                    setTimeout(() => {
+                        this.style.transform = '';
+                    }, 150);
+
+                    const targetId = this.getAttribute('data-target');
+                    const targetAnswer = document.getElementById(targetId);
+                    
+                    // Masquer toutes les réponses avec fadeOut
+                    document.querySelectorAll('.chatbot-answer').forEach(answer => {
+                        if (answer !== targetAnswer) {
+                            answer.style.display = 'none';
+                        }
+                    });
+                    
+                    // Afficher la réponse correspondante avec fadeIn
+                    if (targetAnswer) {
+                        targetAnswer.style.display = 'block';
+                        targetAnswer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    }
+                });
+            });
+            
+            // Fermer en cliquant à l'extérieur
+            document.addEventListener('click', function(e) {
+                if (!chatbotWindow.contains(e.target) && e.target !== chatbotButton) {
+                    chatbotWindow.classList.remove('active');
+                }
+            });
+        });
+    </script>
 </body>
 </html>
