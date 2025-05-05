@@ -4,468 +4,896 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio - Erwan Le Goff</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
-    <style>
-        /* Styles pour le chatbot amélioré */
-        .chatbot-container {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            z-index: 1000;
-            transition: all 0.4s ease;
-        }
-
-        .chatbot-button {
-            background-color: #d40000;
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 60px;
-            height: 60px;
-            font-size: 24px;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease, transform 0.2s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .chatbot-button:hover {
-            transform: scale(1.1);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
-        }
-
-        .chatbot-button:active {
-            transform: scale(0.95);
-        }
-
-        .chatbot-button::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 5px;
-            height: 5px;
-            background: rgba(255, 255, 255, 0.5);
-            opacity: 0;
-            border-radius: 100%;
-            transform: scale(1, 1) translate(-50%, -50%);
-            transform-origin: 50% 50%;
-        }
-
-        .chatbot-button:focus:not(:active)::after {
-            animation: ripple 1s ease-out;
-        }
-
-        .chatbot-window {
-            position: absolute;
-            bottom: 80px;
-            right: 0;
-            width: 300px;
-            background-color: white;
-            border-radius: 15px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-            overflow: hidden;
-            flex-direction: column;
-            max-height: 0;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.4s cubic-bezier(0.18, 0.89, 0.32, 1.28);
-        }
-
-        .chatbot-window.active {
-            max-height: 500px;
-            opacity: 1;
-            transform: translateY(0);
-            display: flex;
-        }
-
-        .chatbot-header {
-            background-color: #af4c4c;
-            color: white;
-            padding: 15px;
-            font-weight: bold;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .chatbot-body {
-            padding: 15px;
-            overflow-y: auto;
-            flex-grow: 1;
-            max-height: 350px;
-        }
-
-        .chatbot-question {
-            background-color: #f1f1f1;
-            border: none;
-            border-radius: 8px;
-            padding: 10px 15px;
-            margin: 8px 0;
-            cursor: pointer;
-            width: 100%;
-            text-align: left;
-            transition: all 0.3s ease;
-            font-size: 14px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-        }
-
-        .chatbot-question:hover {
-            background-color: #e1e1e1;
-            transform: translateX(5px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .chatbot-answer {
-            background-color: #324433;
-            color: white;
-            border-radius: 8px;
-            padding: 15px;
-            margin: 15px 0;
-            display: none;
-            animation: fadeIn 0.5s ease-out;
-            line-height: 1.5;
-        }
-
-        .chatbot-answer ul {
-            padding-left: 20px;
-            margin: 10px 0;
-        }
-
-        .chatbot-answer a {
-            color: #4CAF50;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        .chatbot-answer a:hover {
-            text-decoration: underline;
-        }
-
-        .chatbot-footer {
-            padding: 10px;
-            background-color: #f9f9f9;
-            text-align: center;
-            font-size: 12px;
-            color: #666;
-        }
-
-        .close-chatbot {
-            background: none;
-            border: none;
-            color: white;
-            cursor: pointer;
-            font-size: 20px;
-            transition: transform 0.2s ease;
-        }
-
-        .close-chatbot:hover {
-            transform: rotate(90deg);
-        }
-
-        /* Animations */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
+    <title>Erwan Le Goff - Développeur Web & Topographe</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        poppins: ['Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: '#4F46E5',
+                        secondary: '#10B981',
+                        dark: '#1F2937',
+                        light: '#F3F4F6',
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'float-reverse': 'float-reverse 5s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        'float-reverse': {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(10px)' },
+                        }
+                    }
+                }
             }
         }
-
-        @keyframes ripple {
-            0% {
-                transform: scale(0, 0);
-                opacity: 1;
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .text-gradient {
+                @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary;
             }
-
-            20% {
-                transform: scale(25, 25);
-                opacity: 1;
+            .section-title {
+                @apply text-3xl md:text-4xl font-bold mb-8 text-center relative;
             }
-
-            100% {
-                opacity: 0;
-                transform: scale(40, 40);
+            .section-title:after {
+                content: '';
+                @apply block w-20 h-1 bg-gradient-to-r from-primary to-secondary mx-auto mt-4;
             }
-        }
-
-        /* Effet de vague sur le bouton */
-        .wave {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0) 70%);
-            border-radius: 50%;
-            transform: scale(0);
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        .wave.active {
-            animation: wave 0.6s ease-out;
-        }
-
-        @keyframes wave {
-            0% {
-                transform: scale(0);
-                opacity: 0.5;
+            .skill-badge {
+                @apply px-4 py-2 rounded-full bg-white dark:bg-gray-800 shadow-md hover:shadow-lg transition-all duration-300 flex items-center;
             }
-
-            100% {
-                transform: scale(2);
-                opacity: 0;
+            .project-card {
+                @apply rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 bg-white dark:bg-gray-800;
+            }
+            .timeline-item {
+                @apply relative pl-8 pb-8 border-l-2 border-primary;
+            }
+            .timeline-item:last-child {
+                @apply pb-0;
+            }
+            .timeline-dot {
+                @apply absolute w-4 h-4 rounded-full bg-primary left-[-9px] top-1;
             }
         }
     </style>
 </head>
 
-<body>
-    <header class="header">
-        <h1>Erwan Le Goff</h1>
-        <p>Bienvenue sur mon Portfolio</p>
-        <h2>
-            Passionné par le développement web et les nouvelles technologies, je possède une solide expérience en
-            "Developement Informatique" et dans la topographie. Grâce à mes formations en topographie et en
-            développement web, je suis en mesure d'allier précision technique et créativité numérique. Rigoureux,
-            curieux et toujours en quête d'amélioration, je m'investis pleinement dans chaque projet pour apporter des
-            solutions efficaces.
-        </h2>
-    </header>
-
-    <section class="projects" id="projects">
-        <h2>Mes Projets :</h2>
-        <div class="project-grid">
-            <div class="project-card">
-                <a href="https://tamagotchi-398e.onrender.com" target="_blank">
-                    <img src="images/Tamagotchi.jpg" alt="Tamagotchi" />
-                    <h3>Projet 1 : Tamagotchi réalisé en Javascript</h3>
-                    <p>Petite application réalisé avec les bases du JS et un peu de html/css.</p>
-                </a>
+<body class="font-poppins bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200 transition-colors duration-300">
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-white/90 dark:bg-gray-900/90 backdrop-blur-md shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <a href="#" class="text-xl font-bold text-gradient">Erwan Le Goff</a>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#about" class="hover:text-primary transition-colors">À propos</a>
+                    <a href="#skills" class="hover:text-primary transition-colors">Compétences</a>
+                    <a href="#projects" class="hover:text-primary transition-colors">Projets</a>
+                    <a href="#experience" class="hover:text-primary transition-colors">Expérience</a>
+                    <a href="#contact" class="hover:text-primary transition-colors">Contact</a>
+                    <button id="theme-toggle" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700">
+                        <svg id="theme-icon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                        </svg>
+                    </button>
+                </div>
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-button" class="p-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
             </div>
-
-            <div class="project-card">
-                <a href="https://skywardsword.onrender.com" target="_blank">
-                    <img src="images/Zelda.png" alt="Zelda" />
-                    <h3>Projet 2 : Jeu en Javascript(Canvas)</h3>
-                    <p>Utilisez les flèches du clavier une fois sur la page.</p>
-                </a>
+        </div>
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="md:hidden hidden bg-white dark:bg-gray-800 shadow-lg">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#about"
+                    class="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-100 dark:hover:bg-gray-700">À
+                    propos</a>
+                <a href="#skills"
+                    class="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-100 dark:hover:bg-gray-700">Compétences</a>
+                <a href="#projects"
+                    class="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-100 dark:hover:bg-gray-700">Projets</a>
+                <a href="#experience"
+                    class="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-100 dark:hover:bg-gray-700">Expérience</a>
+                <a href="#contact"
+                    class="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-100 dark:hover:bg-gray-700">Contact</a>
+                <div class="px-3 py-2">
+                    <button id="mobile-theme-toggle" class="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                        </svg>
+                        Changer de thème
+                    </button>
+                </div>
             </div>
+        </div>
+    </nav>
 
-            <div class="project-card">
-                <a href="https://www.paninico.com" target="_blank">
-                    <img src="images/Paninico.jpg" alt="Paninico" />
-                    <h3>Projet 3 : Projet WordPress pour un site de restauration</h3>
-                    <p>Projet WordPress.</p>
-                </a>
+    <!-- Hero Section -->
+    <section class="pt-24 pb-16 md:pt-32 md:pb-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+            <div class="animate__animated animate__fadeInLeft">
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+                    <span class="text-gradient">Erwan Le Goff</span><br>
+                    <span class="text-2xl md:text-3xl font-medium">Développeur Web & Topographe</span>
+                </h1>
+                <p class="text-lg md:text-xl mb-8 text-gray-600 dark:text-gray-300">
+                    Passionné par le développement web et les nouvelles technologies, je combine une expertise technique
+                    en topographie avec des compétences avancées en développement informatique.
+                </p>
+                <div class="flex flex-wrap gap-4">
+                    <a href="#contact"
+                        class="px-6 py-3 bg-primary hover:bg-primary/90 text-white rounded-lg font-medium transition-all transform hover:scale-105 shadow-lg">
+                        Me contacter
+                    </a>
+                    <a href="#projects"
+                        class="px-6 py-3 border-2 border-primary text-primary dark:text-white rounded-lg font-medium transition-all transform hover:scale-105">
+                        Voir mes projets
+                    </a>
+                </div>
             </div>
-
-            <div class="project-card">
-                <a href="https://allodonkeycine-js.onrender.com" target="_blank">
-                    <img src="images/Allodonkeycine.jpg" alt="Allodonkeycine" />
-                    <h3>Projet 4 : Projet en Js pour un site de réservation cinema</h3>
-                    <p>Site avec barre de recherche fonctionnelle.</p>
-                </a>
-            </div>
-
-            <div class="project-card">
-                <a href="https://jeu-de-plateforme.onrender.com" target="_blank">
-                    <img src="images/Mario.jpg" alt="Mario Game" />
-                    <h3>Projet 5 : Jeu de plateforme en javascript</h3>
-                    <p>Projet personnel dans lequel j'ai utilisé Javascript pour coder un jeu de plateforme.</p>
-                </a>
-            </div>
-
-            <div class="project-card">
-                <a href="https://erwan-le-goff-cours.onrender.com/" target="_blank">
-                    <img src="images/Documentation.png" alt="SGDS" />
-                    <h3>Projet 6 : Documentation</h3>
-                    <p>Utile pour expliquer les bases du html, javascript et php à un débutant pour le moment. Pour
-                        pouvoir donner des cours en particulier.</p>
-                </a>
-            </div>
-
-            <div class="project-card">
-                <a href="RapportdeStageBTS/Rapport-de-stage-Erwan-_1_.html" target="_blank">
-                    <img src="images/SGDS.jpg" alt="SGDS" />
-                    <h3>Projet 7 : Rapport de stage BTS Topographe Géomètre</h3>
-                    <p>Stage effectué à SGDS International</p>
-                </a>
+            <div class="animate__animated animate__fadeInRight relative">
+                <div
+                    class="relative w-full h-80 md:h-96 bg-gradient-to-br from-primary to-secondary rounded-2xl overflow-hidden shadow-2xl">
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <div
+                            class="w-48 h-48 md:w-64 md:h-64 rounded-full bg-white/10 backdrop-blur-sm border-4 border-white/20 flex items-center justify-center">
+                            <span class="text-4xl md:text-6xl font-bold text-white">ELG</span>
+                        </div>
+                    </div>
+                    <div class="absolute bottom-0 left-0 w-full h-1/3 bg-gradient-to-t from-black/30 to-transparent">
+                    </div>
+                </div>
+                <div class="absolute -bottom-6 -right-6 w-32 h-32 bg-secondary rounded-full opacity-20 animate-float">
+                </div>
+                <div class="absolute -top-6 -left-6 w-24 h-24 bg-primary rounded-full opacity-20 animate-float-reverse">
+                </div>
             </div>
         </div>
     </section>
 
-    <footer class="footer">
-        <p>Mail : <a href="mailto:elegoff296@gmail.com">elegoff296@gmail.com</a></p>
-        <p><strong>Mobile : </strong> <a href="tel:+33767335117">07 67 33 51 17</a></p>
-        <p>MON GITHUB : <a href="https://github.com/ErwanL3Goff?tab=repositories" target="_blank">ErwanL3Goff</a></p>
-        <p><a href="MonCV.html" target="_blank">Mon CV</a></p>
-        <p><a href="https://www.linkedin.com/in/erwan-le-goff-bb1a81332/" target="_blank">Linkedin</a></p>
-    </footer>
-
-    <!-- Chatbot Container -->
-    <div class="chatbot-container">
-        <div class="chatbot-window" id="chatbotWindow">
-            <div class="chatbot-header">
-                Assistant Virtuel
-                <button class="close-chatbot" id="closeChatbot">×</button>
+    <!-- About Section -->
+    <section id="about" class="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <h2 class="section-title animate__animated animate__fadeIn">À propos</h2>
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 animate__animated animate__fadeInUp"
+                data-wow-delay="0.1s">
+                <div class="text-primary mb-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                    </svg>
+                </div>
+                <h3 class="text-xl font-bold mb-3">Parcours Professionnel</h3>
+                <p class="text-gray-600 dark:text-gray-300">
+                    Double compétence en topographie et développement web avec plusieurs années d'expérience en relevés
+                    terrain et conception d'applications web.
+                </p>
             </div>
-            <div class="chatbot-body" id="chatbotBody">
-                <p>Bonjour ! Posez-moi une question :</p>
-                
-                <button class="chatbot-question" data-target="answer1">Quelles sont vos compétences techniques ?</button>
-                <div class="chatbot-answer" id="answer1">
-                    <p>Je maîtrise plusieurs technologies de développement web :</p>
-                    <ul>
-                        <li>HTML5/CSS3 pour la structuration et la mise en forme</li>
-                        <li>JavaScript pour le développement front-end interactif</li>
-                        <li>PHP pour le développement back-end</li>
-                        <li>Frameworks : Angular (front) et Symfony (back)</li>
-                        <li>WordPress pour la création de sites CMS</li>
-                        <li>Conception d'interfaces responsive et ergonomiques</li>
-                    </ul>
+            <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 animate__animated animate__fadeInUp"
+                data-wow-delay="0.2s">
+                <div class="text-primary mb-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                    </svg>
                 </div>
-                
-                <button class="chatbot-question" data-target="answer2">Quelle est votre formation ?</button>
-                <div class="chatbot-answer" id="answer2">
-                    <p>J'ai suivi plusieurs formations :</p>
-                    <ul>
-                        <li>Formation Développeur Web chez Donkey School (2024)</li>
-                        <li>Licence Professionnelle MIAW à l'Université d'Evry (2023)</li>
-                        <li>Formation d'Intégrateur Web chez OpenClassrooms (2022-2023)</li>
-                        <li>BTS Métier du géomètre topographe (2019-2022)</li>
-                        <li>Bac Professionnel Technicien Géomètre Topographe (2016-2019)</li>
-                    </ul>
-                </div>
-                
-                <button class="chatbot-question" data-target="answer3">Quelle est votre expérience professionnelle ?</button>
-                <div class="chatbot-answer" id="answer3">
-                    <p>Mon expérience professionnelle comprend :</p>
-                    <ul>
-                        <li>Plusieurs stages en topographie chez SGDS International et Cabinet Albertalli</li>
-                        <li>Réalisation de maquettes 3D et plans 2D/3D</li>
-                        <li>Relevés de terrain avec équipements professionnels (Leica TS12, GPS)</li>
-                        <li>Projets web personnels démontrant mes compétences techniques</li>
-                    </ul>
-                </div>
-                
-                <button class="chatbot-question" data-target="answer4">Quels sont vos projets récents ?</button>
-                <div class="chatbot-answer" id="answer4">
-                    <p>Voici quelques-uns de mes projets récents :</p>
-                    <ul>
-                        <li>Tamagotchi en JavaScript</li>
-                        <li>Jeu Zelda-like en Canvas</li>
-                        <li>Site WordPress pour un restaurant</li>
-                        <li>Site de réservation de cinéma en JS</li>
-                        <li>Jeu de plateforme en JavaScript</li>
-                        <li>Documentation pédagogique pour cours particuliers</li>
-                        <li>Et un autre projet en Symfony et Angular avec la promo de septembre 2024 de Donkey School sur l'élaboration d'une application de matching entre recruteurs eet chercheurs d'emploi (pas encore visible sur le portfolio)</li>
-                    </ul>
-                    <p>Tous ces projets sont accessibles depuis mon portfolio.</p>
-                </div>
-                
-                <button class="chatbot-question" data-target="answer5">Comment vous contacter ?</button>
-                <div class="chatbot-answer" id="answer5">
-                    <p>Vous pouvez me contacter par :</p>
-                    <ul>
-                        <li>Email : elegoff296@gmail.com</li>
-                        <li>Téléphone : 07 67 33 51 17</li>
-                        <li>LinkedIn : <a href="https://www.linkedin.com/in/erwan-le-goff-bb1a81332/" target="_blank">profil LinkedIn</a></li>
-                        <li>GitHub : <a href="https://github.com/ErwanL3Goff?tab=repositories" target="_blank">ErwanL3Goff</a></li>
-                    </ul>
-                </div>
+                <h3 class="text-xl font-bold mb-3">Formations</h3>
+                <p class="text-gray-600 dark:text-gray-300">
+                    Diplômé d'un BTS Topographie, formation en développement web chez OpenClassrooms et Donkey School,
+                    avec une licence professionnelle MIAW.
+                </p>
             </div>
-            <div class="chatbot-footer">
-                <small>Assistant de Erwan Le Goff</small>
+            <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 animate__animated animate__fadeInUp"
+                data-wow-delay="0.3s">
+                <div class="text-primary mb-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                </div>
+                <h3 class="text-xl font-bold mb-3">Centres d'Intérêt</h3>
+                <p class="text-gray-600 dark:text-gray-300">
+                    Passionné par l'informatique, le dessin et le sport. Toujours en quête de nouveaux défis techniques
+                    et créatifs.
+                </p>
             </div>
         </div>
-        <div id="wave" class="wave"></div>
-        <button class="chatbot-button" id="chatbotButton">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-            </svg>
-        </button>
-    </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto bg-gray-100 dark:bg-gray-800 rounded-3xl">
+        <h2 class="section-title animate__animated animate__fadeIn">Compétences</h2>
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            <div class="skill-badge animate__animated animate__fadeInUp" data-wow-delay="0.1s">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-primary" fill="none"
+                    viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" />
+                </svg>
+                Symfony
+            </div>
+            <div class="skill-badge animate__animated animate__fadeInUp" data-wow-delay="0.2s">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-primary" fill="none"
+                    viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+                Angular
+            </div>
+            <div class="skill-badge animate__animated animate__fadeInUp" data-wow-delay="0.3s">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-primary" fill="none"
+                    viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" />
+                </svg>
+                PHP
+            </div>
+            <div class="skill-badge animate__animated animate__fadeInUp" data-wow-delay="0.4s">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-primary" fill="none"
+                    viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                </svg>
+                WordPress
+            </div>
+            <div class="skill-badge animate__animated animate__fadeInUp" data-wow-delay="0.5s">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-primary" fill="none"
+                    viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
+                </svg>
+                JavaScript
+            </div>
+            <div class="skill-badge animate__animated animate__fadeInUp" data-wow-delay="0.6s">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-primary" fill="none"
+                    viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
+                </svg>
+                HTML/CSS
+            </div>
+            <div class="skill-badge animate__animated animate__fadeInUp" data-wow-delay="0.7s">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-primary" fill="none"
+                    viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                </svg>
+                VS Code
+            </div>
+            <div class="skill-badge animate__animated animate__fadeInUp" data-wow-delay="0.8s">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-primary" fill="none"
+                    viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                </svg>
+                Autocad
+            </div>
+            <div class="skill-badge animate__animated animate__fadeInUp" data-wow-delay="0.9s">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-primary" fill="none"
+                    viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+                Leica TS12
+            </div>
+            <div class="skill-badge animate__animated animate__fadeInUp" data-wow-delay="1.0s">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-primary" fill="none"
+                    viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+                Levé de terrain
+            </div>
+            <div class="skill-badge animate__animated animate__fadeInUp" data-wow-delay="1.1s">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-primary" fill="none"
+                    viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                </svg>
+                Revit
+            </div>
+            <div class="skill-badge animate__animated animate__fadeInUp" data-wow-delay="1.2s">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-primary" fill="none"
+                    viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
+                </svg>
+                Figma
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <h2 class="section-title animate__animated animate__fadeIn">Mes Projets</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Project 1 -->
+            <div class="project-card animate__animated animate__fadeInUp" data-wow-delay="0.1s">
+                <a href="https://tamagotchi-398e.onrender.com" target="_blank" class="block">
+                    <div class="h-48 overflow-hidden">
+                        <img src="images/Tamagotchi.jpg" alt="Tamagotchi"
+                            class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Tamagotchi en JavaScript</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">Petite application réalisée avec les bases du
+                            JS et un peu de HTML/CSS.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-2 py-1 bg-primary/10 text-primary text-xs rounded-full">JavaScript</span>
+                            <span class="px-2 py-1 bg-primary/10 text-primary text-xs rounded-full">HTML</span>
+                            <span class="px-2 py-1 bg-primary/10 text-primary text-xs rounded-full">CSS</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Project 2 -->
+            <div class="project-card animate__animated animate__fadeInUp" data-wow-delay="0.2s">
+                <a href="https://skywardsword.onrender.com" target="_blank" class="block">
+                    <div class="h-48 overflow-hidden">
+                        <img src="images/Zelda.png" alt="Jeu Zelda"
+                            class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Jeu en JavaScript (Canvas)</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">Jeu inspiré de Zelda utilisant les flèches du
+                            clavier pour se déplacer.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-2 py-1 bg-primary/10 text-primary text-xs rounded-full">JavaScript</span>
+                            <span class="px-2 py-1 bg-primary/10 text-primary text-xs rounded-full">Canvas</span>
+                            <span class="px-2 py-1 bg-primary/10 text-primary text-xs rounded-full">HTML5</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Project 3 -->
+            <div class="project-card animate__animated animate__fadeInUp" data-wow-delay="0.3s">
+                <a href="https://www.paninico.com" target="_blank" class="block">
+                    <div class="h-48 overflow-hidden">
+                        <img src="images/Paninico.jpg" alt="Site WordPress"
+                            class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Site WordPress pour restauration</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">Projet complet WordPress pour un site de
+                            restauration avec gestion de contenu.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-2 py-1 bg-primary/10 text-primary text-xs rounded-full">WordPress</span>
+                            <span class="px-2 py-1 bg-primary/10 text-primary text-xs rounded-full">PHP</span>
+                            <span class="px-2 py-1 bg-primary/10 text-primary text-xs rounded-full">CSS</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Project 4 -->
+            <div class="project-card animate__animated animate__fadeInUp" data-wow-delay="0.4s">
+                <a href="https://allodonkeycine-js.onrender.com" target="_blank" class="block">
+                    <div class="h-48 overflow-hidden">
+                        <img src="images/Allodonkeycine.jpg" alt="Site cinéma"
+                            class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Site de réservation cinéma</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">Site avec barre de recherche fonctionnelle et
+                            système de réservation.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-2 py-1 bg-primary/10 text-primary text-xs rounded-full">JavaScript</span>
+                            <span class="px-2 py-1 bg-primary/10 text-primary text-xs rounded-full">API</span>
+                            <span class="px-2 py-1 bg-primary/10 text-primary text-xs rounded-full">Responsive</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Project 5 -->
+            <div class="project-card animate__animated animate__fadeInUp" data-wow-delay="0.5s">
+                <a href="https://jeu-de-plateforme.onrender.com" target="_blank" class="block">
+                    <div class="h-48 overflow-hidden">
+                        <img src="images/Mario.jpg" alt="Jeu plateforme"
+                            class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Jeu de plateforme en JavaScript</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">Utilisation de la bibliothèque Canvas</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-2 py-1 bg-primary/10 text-primary text-xs rounded-full">JavaScript</span>
+                            <span class="px-2 py-1 bg-primary/10 text-primary text-xs rounded-full">Canvas</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Project 6 -->
+            <div class="project-card animate__animated animate__fadeInUp" data-wow-delay="0.5s">
+                <a href="https://erwan-le-goff-cours.onrender.com/" target="_blank" class="block">
+                    <div class="h-48 overflow-hidden">
+                        <img src="images/Documentation.png" alt="Documentation"
+                            class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Documentation</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">Site web contenant de la documentation sur les
+                            bases de la programmation.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-2 py-1 bg-primary/10 text-primary text-xs rounded-full">HTML</span>
+                            <span class="px-2 py-1 bg-primary/10 text-primary text-xs rounded-full">TAILWINDCSS</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Project 7 -->
+            <div class="project-card animate__animated animate__fadeInUp" data-wow-delay="0.5s">
+                <a href="https://digital-fighter.onrender.com/" target="_blank" class="block">
+                    <div class="h-48 overflow-hidden">
+                        <img src="images/FightinGame.jpg" alt="FightinGame"
+                            class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Documentation</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">Site web contenant de la documentation sur les
+                            bases de la programmation.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-2 py-1 bg-primary/10 text-primary text-xs rounded-full">HTML</span>
+                            <span class="px-2 py-1 bg-primary/10 text-primary text-xs rounded-full">TAILWINDCSS</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Project 8 -->
+            <div class="project-card animate__animated animate__fadeInUp" data-wow-delay="0.5s">
+                <a href="RapportdeStageBTS/index.html" target="_blank" class="block">
+                    <div class="h-48 overflow-hidden">
+                        <img src="images/SGDS.jpg" alt="Jeu plateforme"
+                            class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Rapport de stage Topographie</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">Rapport de Stage du BTS MGTMN</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-2 py-1 bg-primary/10 text-primary text-xs rounded-full">Fichier pdf</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+
+
+            <p class="text-gray-600 dark:text-gray-300 mb-4">Projet personnel dans lequel j'ai utilisé JavaScript pour
+                coder un jeu de plateforme.</p>
+            <div class="flex flex-wrap gap-2">
+                <span class="px-2 py-1 bg-primary/10 text-primary text-xs rounded-full">JavaScript</span>
+                <span class="px-2 py-1 bg-primary/10 text-primary text-xs rounded-full">Game Dev</span>
+                <span class="px-2 py-1 bg-primary/10 text-primary text-xs rounded-full">Canvas</span>
+            </div>
+        </div>
+        </a>
+        </div>
+
+        <!-- Project 6 -->
+        <div class="project-card animate__animated animate__fadeInUp" data-wow-delay="0.6s">
+            <a href="https://erwan-le-goff-cours.onrender.com/" target="_blank" class="block">
+                <div class="h-48 overflow-hidden">
+                    <img src="images/Documentation.png"
+                        alt="Documentation"
+                        class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold mb-2">Documentation pédagogique</h3>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">Utile pour expliquer les bases du HTML, JavaScript
+                        et PHP à un débutant.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-2 py-1 bg-primary/10 text-primary text-xs rounded-full">HTML</span>
+                        <span class="px-2 py-1 bg-primary/10 text-primary text-xs rounded-full">JavaScript</span>
+                        <span class="px-2 py-1 bg-primary/10 text-primary text-xs rounded-full">PHP</span>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <!-- Project 7 -->
+        <div class="project-card animate__animated animate__fadeInUp" data-wow-delay="0.7s">
+            <a href="RapportdeStageBTS/Rapport-de-stage-Erwan-_1_.html" target="_blank" class="block">
+                <div class="h-48 overflow-hidden">
+                    <img src="images/SGDS.jpg"
+                        alt="Rapport de stage"
+                        class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold mb-2">Rapport de stage BTS</h3>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">Stage effectué à SGDS International en tant que
+                        topographe géomètre.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-2 py-1 bg-primary/10 text-primary text-xs rounded-full">Topographie</span>
+                        <span class="px-2 py-1 bg-primary/10 text-primary text-xs rounded-full">Leica TS12</span>
+                        <span class="px-2 py-1 bg-primary/10 text-primary text-xs rounded-full">Autocad</span>
+                    </div>
+                </div>
+            </a>
+        </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience"
+        class="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto bg-gray-100 dark:bg-gray-800 rounded-3xl">
+        <h2 class="section-title animate__animated animate__fadeIn">Expérience Professionnelle</h2>
+
+        <div class="max-w-3xl mx-auto">
+            <!-- Formation Développeur Web -->
+            <div class="timeline-item animate__animated animate__fadeInUp" data-wow-delay="0.1s">
+                <div class="timeline-dot"></div>
+                <h3 class="text-xl font-bold">Formation Développeur Web</h3>
+                <p class="text-secondary font-medium">Donkey School, Paris | Septembre 2024</p>
+                <p class="mt-2 text-gray-600 dark:text-gray-300">
+                    Formation intensive en développement web avec spécialisation Symfony et Angular.
+                </p>
+            </div>
+
+            <!-- Licence Pro MIAW -->
+            <div class="timeline-item animate__animated animate__fadeInUp" data-wow-delay="0.2s">
+                <div class="timeline-dot"></div>
+                <h3 class="text-xl font-bold">Licence Professionnelle MIAW</h3>
+                <p class="text-secondary font-medium">Université d'Evry | Septembre - Décembre 2023</p>
+                <p class="mt-2 text-gray-600 dark:text-gray-300">
+                    Formation en métiers de l'informatique : applications web.
+                </p>
+            </div>
+
+            <!-- Formation Intégrateur Web -->
+            <div class="timeline-item animate__animated animate__fadeInUp" data-wow-delay="0.3s">
+                <div class="timeline-dot"></div>
+                <h3 class="text-xl font-bold">Formation d'Intégrateur Web</h3>
+                <p class="text-secondary font-medium">OpenClassrooms | 2022 - 2023</p>
+                <p class="mt-2 text-gray-600 dark:text-gray-300">
+                    Formation certifiante en développement front-end et intégration web.
+                </p>
+            </div>
+
+            <!-- Stage BTS Topographe -->
+            <div class="timeline-item animate__animated animate__fadeInUp" data-wow-delay="0.4s">
+                <div class="timeline-dot"></div>
+                <h3 class="text-xl font-bold">Stage BTS Topographe Géomètre</h3>
+                <p class="text-secondary font-medium">SGDS International, Evry | Mai - Juillet 2021</p>
+                <p class="mt-2 text-gray-600 dark:text-gray-300">
+                    Relevés et établissement de plans 2D/3D, schémas isométriques, géoréférencement des réseaux par GPS.
+                </p>
+            </div>
+
+            <!-- Stage Terminale -->
+            <div class="timeline-item animate__animated animate__fadeInUp" data-wow-delay="0.5s">
+                <div class="timeline-dot"></div>
+                <h3 class="text-xl font-bold">Stage de Terminale</h3>
+                <p class="text-secondary font-medium">Cabinet Albertalli, Chilly-Mazarin | Janvier - Février 2019</p>
+                <p class="mt-2 text-gray-600 dark:text-gray-300">
+                    Relevé de terrain, utilisation de Covadis et Autocad.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <h2 class="section-title animate__animated animate__fadeIn">Contactez-moi</h2>
+
+        <div class="grid md:grid-cols-2 gap-12">
+            <div class="animate__animated animate__fadeInLeft">
+                <h3 class="text-2xl font-bold mb-6">Informations de contact</h3>
+
+                <div class="space-y-6">
+                    <div class="flex items-start">
+                        <div class="bg-primary/10 p-3 rounded-lg mr-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-primary" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                            </svg>
+                        </div>
+                        <div>
+                            <h4 class="font-bold">Email</h4>
+                            <a href="mailto:elegoff296@gmail.com"
+                                class="text-gray-600 dark:text-gray-300 hover:text-primary transition-colors">elegoff296@gmail.com</a>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start">
+                        <div class="bg-primary/10 p-3 rounded-lg mr-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-primary" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                            </svg>
+                        </div>
+                        <div>
+                            <h4 class="font-bold">Téléphone</h4>
+                            <a href="tel:+33767335117"
+                                class="text-gray-600 dark:text-gray-300 hover:text-primary transition-colors">07 67 33
+                                51 17</a>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start">
+                        <div class="bg-primary/10 p-3 rounded-lg mr-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-primary" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                            </svg>
+                        </div>
+                        <div>
+                            <h4 class="font-bold">Adresse</h4>
+                            <p class="text-gray-600 dark:text-gray-300">Épinay-sur-Orge, France</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start">
+                        <div class="bg-primary/10 p-3 rounded-lg mr-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-primary" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+                            </svg>
+                        </div>
+                        <div>
+                            <h4 class="font-bold">Réseaux sociaux</h4>
+                            <div class="flex space-x-4 mt-2">
+                                <a href="https://github.com/ErwanL3Goff?tab=repositories" target="_blank"
+                                    class="text-gray-600 dark:text-gray-300 hover:text-primary transition-colors">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path
+                                            d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                                    </svg>
+                                </a>
+                                <a href="https://www.linkedin.com/in/erwan-le-goff-bb1a81332/" target="_blank"
+                                    class="text-gray-600 dark:text-gray-300 hover:text-primary transition-colors">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path
+                                            d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="animate__animated animate__fadeInRight">
+                <h3 class="text-2xl font-bold mb-6">Envoyez-moi un message</h3>
+                <form class="space-y-6">
+                    <div>
+                        <label for="name"
+                            class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Nom</label>
+                        <input type="text" id="name"
+                            class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-primary focus:border-primary dark:bg-gray-700 transition-all">
+                    </div>
+
+                    <div>
+                        <label for="email"
+                            class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Email</label>
+                        <input type="email" id="email"
+                            class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-primary focus:border-primary dark:bg-gray-700 transition-all">
+                    </div>
+
+                    <div>
+                        <label for="message"
+                            class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Message</label>
+                        <textarea id="message" rows="5"
+                            class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-primary focus:border-primary dark:bg-gray-700 transition-all"></textarea>
+                    </div>
+
+                    <button type="submit"
+                        class="px-6 py-3 bg-primary hover:bg-primary/90 text-white rounded-lg font-medium transition-all transform hover:scale-105 shadow-lg w-full">
+                        Envoyer le message
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Erwan Le Goff</h3>
+                    <p class="text-gray-400">Développeur Web & Topographe passionné par la création de solutions
+                        numériques innovantes.</p>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Liens rapides</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#about" class="text-gray-400 hover:text-white transition-colors">À propos</a></li>
+                        <li><a href="#skills" class="text-gray-400 hover:text-white transition-colors">Compétences</a>
+                        </li>
+                        <li><a href="#projects" class="text-gray-400 hover:text-white transition-colors">Projets</a>
+                        </li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-white transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Contact</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li class="flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                            </svg>
+                            elegoff296@gmail.com
+                        </li>
+                        <li class="flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                            </svg>
+                            07 67 33 51 17
+                        </li>
+                        <li class="flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                            </svg>
+                            Épinay-sur-Orge, France
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-700 mt-12 pt-8 text-center text-gray-400">
+                <p>&copy; 2024 Erwan Le Goff. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to top button -->
+    <button id="back-to-top"
+        class="fixed bottom-8 right-8 bg-primary text-white p-3 rounded-full shadow-lg opacity-0 invisible transition-all duration-300">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+        </svg>
+    </button>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const chatbotButton = document.getElementById('chatbotButton');
-            const chatbotWindow = document.getElementById('chatbotWindow');
-            const closeChatbot = document.getElementById('closeChatbot');
-            const questions = document.querySelectorAll('.chatbot-question');
-            const wave = document.getElementById('wave');
-            
-            // Animation d'onde au clic
-            chatbotButton.addEventListener('click', function(e) {
-                // Position de l'onde
-                const rect = this.getBoundingClientRect();
-                wave.style.left = (e.clientX - rect.left) + 'px';
-                wave.style.top = (e.clientY - rect.top) + 'px';
-                
-                // Activer l'animation
-                wave.classList.add('active');
-                setTimeout(() => wave.classList.remove('active'), 600);
-                
-                // Basculer la fenêtre du chatbot
-                chatbotWindow.classList.toggle('active');
-                
-                // Petite vibration du bouton
-                this.style.transform = 'scale(0.9)';
-                setTimeout(() => {
-                    this.style.transform = 'scale(1)';
-                }, 100);
-            });
-            
-            // Fermer le chatbot
-            closeChatbot.addEventListener('click', function() {
-                chatbotWindow.classList.remove('active');
-            });
-            
-            // Gérer les questions avec animation
-            questions.forEach(question => {
-                question.addEventListener('click', function() {
-                    // Animation de clic
-                    this.style.transform = 'scale(0.98)';
-                    setTimeout(() => {
-                        this.style.transform = '';
-                    }, 150);
+        // Theme toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        const mobileThemeToggle = document.getElementById('mobile-theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
 
-                    const targetId = this.getAttribute('data-target');
-                    const targetAnswer = document.getElementById(targetId);
-                    
-                    // Masquer toutes les réponses avec fadeOut
-                    document.querySelectorAll('.chatbot-answer').forEach(answer => {
-                        if (answer !== targetAnswer) {
-                            answer.style.display = 'none';
-                        }
-                    });
-                    
-                    // Afficher la réponse correspondante avec fadeIn
-                    if (targetAnswer) {
-                        targetAnswer.style.display = 'block';
-                        targetAnswer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-                    }
-                });
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+            themeIcon.setAttribute('stroke', 'currentColor');
+        } else {
+            document.documentElement.classList.remove('dark');
+            themeIcon.setAttribute('stroke', 'currentColor');
+        }
+
+        themeToggle.addEventListener('click', () => {
+            toggleTheme();
+        });
+
+        mobileThemeToggle.addEventListener('click', () => {
+            toggleTheme();
+            document.getElementById('mobile-menu').classList.add('hidden');
+        });
+
+        function toggleTheme() {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('color-theme', 'light');
+                themeIcon.setAttribute('stroke', 'currentColor');
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('color-theme', 'dark');
+                themeIcon.setAttribute('stroke', 'currentColor');
+            }
+        }
+
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
             });
-            
-            // Fermer en cliquant à l'extérieur
-            document.addEventListener('click', function(e) {
-                if (!chatbotWindow.contains(e.target) && e.target !== chatbotButton) {
-                    chatbotWindow.classList.remove('active');
+        });
+
+        // Back to top button
+        const backToTopButton = document.getElementById('back-to-top');
+
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.remove('opacity-0', 'invisible');
+                backToTopButton.classList.add('opacity-100', 'visible');
+            } else {
+                backToTopButton.classList.remove('opacity-100', 'visible');
+                backToTopButton.classList.add('opacity-0', 'invisible');
+            }
+        });
+
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
                 }
             });
         });
+
+        // Initialize ScrollReveal
+        ScrollReveal().reveal('.animate__animated', {
+            delay: 200,
+            distance: '20px',
+            duration: 1000,
+            easing: 'cubic-bezier(0.5, 0, 0, 1)',
+            interval: 100
+        });
     </script>
 </body>
+
 </html>
